@@ -75,10 +75,32 @@ const pgVector = new PgVector({
 //   vectorStore: pgVector,
 //   indexName: "berkshire_letters",
 // });
+// const berkshireTool = createVectorQueryTool({
+//   vectorStore: pgVector,
+//   indexName: "berkshire_letters",
+//   model: groq.languageModel("llama-3.3-70b-versatile"),
+// });
+import ollama from "ollama";
+
 const berkshireTool = createVectorQueryTool({
   vectorStore: pgVector,
   indexName: "berkshire_letters",
-  model: groq.languageModel("llama-3.3-70b-versatile"),
+  model: {
+    async doEmbed(texts: string[]) {
+      const vectors: number[][] = [];
+
+      for (const text of texts) {
+        const res = await ollama.embeddings({
+          model: "nomic-embed-text",
+          prompt: text,
+        });
+
+        vectors.push(res.embedding);
+      }
+
+      return vectors;
+    },
+  },
 });
 
 export const berkshireAgent = new Agent({
