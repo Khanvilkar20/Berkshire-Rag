@@ -28,12 +28,13 @@
     "@mastra/pg": "^1.7.2",
     "@mastra/rag": "^2.1.2",
     "@types/pg": "^8.18.0",
-    "ai": "^6.0.116",
+    "ai": "^4.3.19",
     "ollama": "^0.6.3",
+    "ollama-ai-provider": "^1.2.0",
     "pdf-parse": "^2.4.5",
     "pdf-parse-fork": "^1.2.0",
     "pg": "^8.20.0",
-    "zod": "^4.3.6"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^25.3.5",
